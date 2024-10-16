@@ -75,18 +75,15 @@ print(f"C_L: {C_L}")
 print(f"C_mLE: {C_mLE}")
 print(f"C_mQC: {C_mQC}")
 
-
-#modify to read in inputs from json file
-#modify code to loop through various angles of attack
-
+#Plot Airfoil Geometry
 plt.figure(1)
 plt.plot(geometry[:,0],geometry[:,1])
 plt.axis("equal")
 plt.title('Airfoil Geometry')
 
+#Plot coefficient of lift
 plt.figure(2)
 plt.plot(alpha*180/np.pi,C_L)
 plt.title('Lift Coefficient ($C_{L}$)')
 plt.xlabel("Angle ($^{o}$)");plt.ylabel("$C_{L}$",rotation='horizontal')
 #plt.show()
-#plt.savefig('Figure{}'.format(3+k*3));plt.pause(0.00001)
