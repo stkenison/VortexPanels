@@ -7,7 +7,7 @@ with open('input.json') as f: data = json.load(f)
 #initialize variables
 geometry = np.loadtxt(data['geometry'],dtype = float) #Load airfoil geometry from file
 alpha = np.array(data['alpha[deg]'])/180*np.pi #define desired angles of attack
-v_inf = data['freestream_velocity'] #define freestream velocity
+v_inf = data['freestream_velocity']
 n = geometry.shape[0] #count number of points in airfoil geometry file
 n_alpha = len(alpha) #count number of unique values in angle of attack list
 
@@ -70,12 +70,12 @@ for i in range(n_alpha):
         )
     )  # find value of current iteration of quarter chord moment coefficient array
 
-#print out calculated coefficients to terminal
-print(f"C_L: {C_L}")
-print(f"C_mLE: {C_mLE}")
-print(f"C_mQC: {C_mQC}")
+#print out calculated coefficients for verification
+print(f"C_L: {C_L}\n")
+print(f"C_mLE: {C_mLE}\n")
+print(f"C_mQC: {C_mQC}\n")
 
-#Plot airfoil geometry
+#Plot airfoil
 plt.figure(1)
 plt.plot(geometry[:,0],geometry[:,1])
 plt.axis("equal")
@@ -86,4 +86,14 @@ plt.figure(2)
 plt.plot(alpha*180/np.pi,C_L)
 plt.title('Lift Coefficient ($C_{L}$)')
 plt.xlabel("Angle ($^{o}$)");plt.ylabel("$C_{L}$",rotation='horizontal')
+
+plt.figure(3)
+plt.plot(alpha*180/np.pi,C_mLE)
+plt.title('Coefficient of Leading Edge Moment ($C_{mLE}$)')
+plt.xlabel("Angle ($^{o}$)");plt.ylabel("$C_{mLE}$",rotation='horizontal')
+
+plt.figure(4)
+plt.plot(alpha*180/np.pi,C_mQC)
+plt.title('Coefficient of Quarter-Chord Moment ($C_{mc/4}$)')
+plt.xlabel("Angle ($^{o}$)");plt.ylabel("$C_{mc/4}$",rotation='horizontal')
 plt.show()
