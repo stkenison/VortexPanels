@@ -7,6 +7,7 @@ with open('input.json') as f: data = json.load(f)
 #initialize variables
 geometry = np.loadtxt(data['geometry'],dtype = float) #Load airfoil geometry from file
 alpha = np.array(data['alpha[deg]'])/180*np.pi #define desired angles of attack
+if np.isscalar(alpha): alpha = np.array([alpha])  # Convert scalar to an array if singular value
 v_inf = data['freestream_velocity'] #define freestream velocity
 n = geometry.shape[0] #count number of points in airfoil geometry file
 n_alpha = len(alpha) #count number of unique values in angle of attack list
@@ -71,6 +72,7 @@ for i in range(n_alpha):
     )  # find value of current iteration of quarter chord moment coefficient array
 
 #print out calculated coefficients for verification
+print(f"a: {alpha*180/np.pi}\n")
 print(f"C_L: {C_L}\n")
 print(f"C_mLE: {C_mLE}\n")
 print(f"C_mQC: {C_mQC}\n")
